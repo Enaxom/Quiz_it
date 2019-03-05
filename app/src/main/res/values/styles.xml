@@ -6,12 +6,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textViewStyle">@font/CaviarDreams</item>
-        <item name="android:button">@font/CaviarDreams</item>
+        <item name="android:textViewStyle">@font/caviardreams</item>
+        <item name="android:button">@font/caviardreams</item>
     </style>
 
     <style name="button" parent="@android:style/Widget.Button">
-        <item name="android:fontFamily">@font/Caviar_Dreams_Bold</item>
+        <item name="android:fontFamily">@font/caviardreamsbold</item>
     </style>
 
 </resources>
