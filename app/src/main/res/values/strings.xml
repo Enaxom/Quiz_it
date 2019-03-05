@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Quiz it</string>
+    <string name="app_name">Quiz\nit !</string>
+    <string name="tech">High-Tech</string>
+    <string name="culture">General culture</string>
+    <string name="animal">Animals</string>
+    <string name="science">Sciences</string>
+    <string name="all">All in one</string>
 </resources>
