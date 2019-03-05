@@ -5,18 +5,94 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:max="100"
-            android:progress="0"
+            android:minHeight="30sp"
+            android:progress="100"
             android:id="@+id/progressbar"
-            android:indeterminateTint="@android:color/holo_green_dark"
-            android:progressTint="@android:color/holo_green_dark"
+            android:progressTint="#2f9926"
+            android:progressBackgroundTint="#636262"
             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15sp"
+            android:layout_marginTop="10sp"
+            android:textAlignment="textEnd"
+            android:textSize="30sp"
+            android:fontFamily="@font/caviardreamsbold"
+            android:text="12"
+            android:id="@+id/tv_no"/>
+
+        <TextView
+            android:layout_width="400sp"
+            android:layout_marginTop="70sp"
+            android:layout_marginBottom="70sp"
+            android:text="Exemple de question relativement longue pour visualiser le rendu ?"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:fontFamily="@font/caviardreams"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="30sp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_multiple"
+            android:text="Answer one"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:id="@+id/btn_one"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="30sp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_multiple"
+            android:text="Answer two"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:id="@+id/btn_two"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="30sp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_multiple"
+            android:text="Answer three"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:id="@+id/btn_three"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="30sp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_multiple"
+            android:text="Example of a long answer, because long answer can exist and be more than one line, so we need padding !"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:id="@+id/btn_four"/>
 
 
     </LinearLayout>

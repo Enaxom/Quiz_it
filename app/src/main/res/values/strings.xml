@@ -5,4 +5,7 @@
     <string name="animal">Animals</string>
     <string name="science">Science</string>
     <string name="all">All in one</string>
+
+    <string name="yes">True</string>
+    <string name="no">False</string>
 </resources>
