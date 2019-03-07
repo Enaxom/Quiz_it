@@ -1,31 +1,35 @@
 package com.morgane.quizit;
 
-import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
+import android.util.Log;
 import android.widget.ProgressBar;
+
+import java.util.ArrayList;
 
 public class MultipleQuestionActivity extends AppCompatActivity {
 
     ProgressBar progress;
     MyCountDownTimer countTimer;
-    //Button button;
+    ArrayList<Questions> questions;
+    int number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_question);
-
         progress = findViewById(R.id.progressbar);
-        //button = findViewById(R.id.btn_one);
-        //GradientDrawable drawable = (GradientDrawable) button.getBackground();
-        //drawable.setStroke(3, Color.RED);
+
+        Intent intent = getIntent();
+        number = intent.getIntExtra("number", 0);
+        Log.d("QUEST", "int : " + number);
+        questions = new ArrayList<Questions>();
+        questions = getIntent().getParcelableArrayListExtra("questions");
+        Log.d("QUEST", "List size : " + questions.size());
 
         countTimer = new MyCountDownTimer(15000, 10);
         countTimer.start();

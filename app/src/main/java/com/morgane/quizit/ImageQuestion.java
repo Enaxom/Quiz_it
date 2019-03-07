@@ -1,13 +1,19 @@
 package com.morgane.quizit;
 
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
 
-public class ImageQuestion {
+import java.util.Collections;
+
+import static java.util.Arrays.asList;
+
+public class ImageQuestion extends Questions {
 
     private Themes theme;
-    private String question, answer;
+    private String question;
     private Drawable image;
-    private String[] wrongs;
+    private String[] answers;
+    private int idGood;
 
     /**
      * Constructor of a multiple question
@@ -23,8 +29,20 @@ public class ImageQuestion {
         this.theme = theme;
         this.question = question;
         this.image = image;
-        this.answer = answer;
-        this.wrongs = new String[]{wrong_one, wrong_two, wrong_three};
+        this.answers = new String[]{answer, wrong_one, wrong_two, wrong_three};
+
+        // The different answers are shuffle directly here and the position of the good answer is saved
+        Collections.shuffle(asList(answers));
+        for (int i = 0; i < answers.length; i++) {
+            if (answers[i].equals(answer)) {
+                idGood = i;
+            }
+        }
+    }
+
+    protected ImageQuestion(Parcel in) {
+        theme = Themes.valueOf(in.readString());
+        question = in.readString();
     }
 
     /**
@@ -56,7 +74,7 @@ public class ImageQuestion {
      * @return The String answer
      */
     public String getAnswer() {
-        return answer;
+        return answers[idGood];
     }
 
     /**
@@ -65,6 +83,44 @@ public class ImageQuestion {
      * @return True if it's the good answer, false if not
      */
     public boolean isValid(String answer) {
-        return answer.equals(this.answer);
+        return answer.equals(answers[idGood]);
     }
+
+    /**
+     * Gives the 4 answers available for the question
+     * @return String[] the array of answers
+     */
+    public String[] getAnswers() {
+        return answers;
+    }
+
+    /**
+     * Gives the type of the question
+     * @return type (3), the type of the question
+     */
+    public int getType() {
+        return 3;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+    }
+
+    public static final Creator<ImageQuestion> CREATOR = new Creator<ImageQuestion>() {
+        @Override
+        public ImageQuestion createFromParcel(Parcel in) {
+            return new ImageQuestion(in);
+        }
+
+        @Override
+        public ImageQuestion[] newArray(int size) {
+            return new ImageQuestion[size];
+        }
+    };
 }

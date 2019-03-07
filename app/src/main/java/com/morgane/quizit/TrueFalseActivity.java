@@ -1,23 +1,35 @@
 package com.morgane.quizit;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ProgressBar;
+
+import java.util.ArrayList;
 
 public class TrueFalseActivity extends AppCompatActivity {
 
     ProgressBar progress;
     MyCountDownTimer countTimer;
+    ArrayList<Questions> questions;
+    int number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_true_false);
-
         progress = findViewById(R.id.progressbar);
+
+        Intent intent = getIntent();
+        number = intent.getIntExtra("number", 0);
+        Log.d("QUEST", "int : " + number);
+        questions = new ArrayList<Questions>();
+        questions = getIntent().getParcelableArrayListExtra("questions");
+        Log.d("QUEST", "List size : " + questions.size());
 
         countTimer = new MyCountDownTimer(15000, 10);
         countTimer.start();
