@@ -27,27 +27,27 @@
             android:textAlignment="textEnd"
             android:textSize="30sp"
             android:fontFamily="@font/caviardreamsbold"
-            android:text="12"
             android:id="@+id/tv_no"/>
 
         <TextView
             android:layout_width="400sp"
             android:layout_marginTop="50sp"
             android:layout_marginBottom="40sp"
-            android:text="Exemple de question relativement longue pour visualiser le rendu ?"
             android:textAlignment="center"
             android:textSize="40sp"
             android:fontFamily="@font/caviardreams"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:id="@+id/tv_question"
             />
 
         <ImageView
             android:layout_width="500sp"
             android:layout_height="250sp"
             android:layout_gravity="center"
-            android:src="@drawable/image_paysage"
-            android:layout_marginBottom="50sp"/>
+            android:layout_marginBottom="50sp"
+            android:id="@+id/img"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,7 +63,6 @@
                 android:textAllCaps="false"
                 android:background="@drawable/button_multiple"
                 android:layout_marginEnd="15sp"
-                android:text="Answer one"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_weight="1"
@@ -74,13 +73,13 @@
                 android:layout_width="250sp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_multiple"
-                android:text="Answer two"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_weight="1"
                 android:id="@+id/btn_two"/>
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,7 +94,6 @@
                 android:textAllCaps="false"
                 android:background="@drawable/button_multiple"
                 android:layout_marginEnd="15sp"
-                android:text="Answer one"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_weight="1"
@@ -106,14 +104,12 @@
                 android:layout_width="250sp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_multiple"
-                android:text="Answer two"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_weight="1"
                 android:id="@+id/btn_four"/>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

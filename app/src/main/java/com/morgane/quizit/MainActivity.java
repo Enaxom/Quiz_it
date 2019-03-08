@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     public void play() {
         Intent intent;
         int type = questions.get(0).getType();
-        int number = 1;
+        int number = 0;
 
         if (type == 1) {
             intent = new Intent(MainActivity.this, MultipleQuestionActivity.class);
@@ -148,11 +148,6 @@ public class MainActivity extends AppCompatActivity {
         App app = (App) getApplicationContext();
         app.list = questions;
 
-        for (int i = 0; i < questions.size(); i++) {
-            Log.d("LIST", "Q" + i + " : " + questions.get(i).toString());
-        }
-
-        Log.d("QUEST","size init : " + questions.size());
         startActivity(intent);
     }
 
