@@ -1,7 +1,6 @@
 package com.morgane.quizit;
 
 import android.graphics.drawable.Drawable;
-import android.os.Parcel;
 
 /**
  * Class for true / false questions.
@@ -21,12 +20,6 @@ public class TrueFalse extends Questions {
         this.theme = theme;
         this.question = question;
         this.answer = answer;
-    }
-
-    protected TrueFalse(Parcel in) {
-        theme = Themes.valueOf(in.readString());
-        question = in.readString();
-        answer = in.readString();
     }
 
     /**
@@ -86,24 +79,11 @@ public class TrueFalse extends Questions {
         return 2;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String toString() {
+        String res = "";
+        res += "Theme : " + theme.toString() + "\n";
+        res += "Question : " + question + "\n";
+        res += "Good answer : " + getAnswer() + "\n";
+        return res;
     }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-    }
-
-    public static final Creator<TrueFalse> CREATOR = new Creator<TrueFalse>() {
-        @Override
-        public TrueFalse createFromParcel(Parcel in) {
-            return new TrueFalse(in);
-        }
-
-        @Override
-        public TrueFalse[] newArray(int size) {
-            return new TrueFalse[size];
-        }
-    };
 }

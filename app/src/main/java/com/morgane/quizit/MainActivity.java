@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     public void readFill(Themes theme) {
@@ -30,12 +31,10 @@ public class MainActivity extends AppCompatActivity {
         // true_false_questions.csv -> 3 columns : THEME ; question ; answer (0/1)
         // image_question.csv -> 7 columns : THEME ; question ; drawable ; answer ; wrong ; wrong ; wrong
 
-        switch(theme) {
-            case ALL: fillAll();
-            case TECH: fill(Themes.TECH);
-            case CULTURE: fill(Themes.CULTURE);
-            case ANIMALS: fill(Themes.ANIMALS);
-            case SCIENCE: fill(Themes.SCIENCE);
+        if (theme == Themes.ALL) {
+            fillAll();
+        } else {
+            fill(theme);
         }
     }
 
@@ -50,31 +49,33 @@ public class MainActivity extends AppCompatActivity {
                 String[] row = currentLine.split(";");
                 Themes theme = Themes.fromString(row[0]);
 
-                if (theme == pTheme) {
+                if (pTheme.toString().equals(row[0])) {
                     Questions question = new MultipleQuestion(theme, row[1], row[2], row[3], row[4], row[5]);
                     questions.add(question);
                 }
             }
 
+            br.close();
             br = new BufferedReader(new InputStreamReader(getAssets().open("true_false_questions.csv")));
 
             while ((currentLine = br.readLine()) != null) {
                 String[] row = currentLine.split(";");
                 Themes theme = Themes.fromString(row[0]);
 
-                if (theme == pTheme) {
+                if (pTheme.toString().equals(row[0])) {
                     Questions question = new TrueFalse(theme, row[1], (row[2].equals("1") ? "True" : "False"));
                     questions.add(question);
                 }
             }
 
+            br.close();
             br = new BufferedReader(new InputStreamReader(getAssets().open("image_question.csv")));
 
             while ((currentLine = br.readLine()) != null) {
                 String[] row = currentLine.split(";");
                 Themes theme = Themes.fromString(row[0]);
 
-                if (theme == pTheme) {
+                if (pTheme.toString().equals(row[0])) {
                     Resources resources = getApplicationContext().getResources();
                     final int resourceId = resources.getIdentifier(row[2].split("\\.")[0], "drawable", getPackageName());
                     Drawable img = ContextCompat.getDrawable(this, resourceId);
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 questions.add(question);
             }
 
+            br.close();
             br = new BufferedReader(new InputStreamReader(getAssets().open("true_false_questions.csv")));
 
             while ((currentLine = br.readLine()) != null) {
@@ -110,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 questions.add(question);
             }
 
+            br.close();
             br = new BufferedReader(new InputStreamReader(getAssets().open("image_question.csv")));
 
             while ((currentLine = br.readLine()) != null) {
@@ -141,32 +144,44 @@ public class MainActivity extends AppCompatActivity {
         }
 
         intent.putExtra("number", number);
-        intent.putParcelableArrayListExtra("questions", questions);
-        Log.d("LISTE","size init : " + questions.size());
+
+        App app = (App) getApplicationContext();
+        app.list = questions;
+
+        for (int i = 0; i < questions.size(); i++) {
+            Log.d("LIST", "Q" + i + " : " + questions.get(i).toString());
+        }
+
+        Log.d("QUEST","size init : " + questions.size());
         startActivity(intent);
     }
 
     public void playAll(View view) {
+        Log.d("THEME", "all");
         readFill(Themes.ALL);
         play();
     }
 
     public void playTech(View view) {
+        Log.d("THEME", "tech");
         readFill(Themes.TECH);
         play();
     }
 
     public void playCulture(View view) {
+        Log.d("THEME", "cult");
         readFill(Themes.CULTURE);
         play();
     }
 
     public void playAnimal(View view) {
+        Log.d("THEME", "anim");
         readFill(Themes.ANIMALS);
         play();
     }
 
     public void playScience(View view) {
+        Log.d("THEME", "scie");
         readFill(Themes.SCIENCE);
         play();
     }

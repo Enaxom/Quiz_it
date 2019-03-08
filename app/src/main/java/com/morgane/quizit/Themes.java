@@ -12,7 +12,7 @@ public enum Themes {
 
     private final String text;
 
-    private Themes(final String text) {
+    Themes(final String text) {
         this.text = text;
     }
 

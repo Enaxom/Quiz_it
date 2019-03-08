@@ -1,12 +1,11 @@
 package com.morgane.quizit;
 
 import android.graphics.drawable.Drawable;
-import android.os.Parcelable;
 
 /**
  * Abstract class Questions to have a merge of the 3 types of question
  */
-public abstract class Questions implements Parcelable {
+public abstract class Questions {
 
     /**
      * The constructor get the constructor of the other 3 class MultipleQuestion, TrueFalse and ImageQuestion
@@ -59,4 +58,6 @@ public abstract class Questions implements Parcelable {
      *         3 -> ImageQuestion
      */
     public abstract int getType();
+
+    public abstract String toString();
 }

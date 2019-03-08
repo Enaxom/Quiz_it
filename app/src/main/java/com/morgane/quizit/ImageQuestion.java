@@ -1,10 +1,8 @@
 package com.morgane.quizit;
 
 import android.graphics.drawable.Drawable;
-import android.os.Parcel;
 
 import java.util.Collections;
-
 import static java.util.Arrays.asList;
 
 public class ImageQuestion extends Questions {
@@ -38,11 +36,6 @@ public class ImageQuestion extends Questions {
                 idGood = i;
             }
         }
-    }
-
-    protected ImageQuestion(Parcel in) {
-        theme = Themes.valueOf(in.readString());
-        question = in.readString();
     }
 
     /**
@@ -102,25 +95,13 @@ public class ImageQuestion extends Questions {
         return 3;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String toString() {
+        String res = "";
+        res += "Theme : " + theme.toString() + "\n";
+        res += "Question : " + question + "\n";
+        res += "Answers : " + answers[0] + " ; " + answers[1] + " ; " + answers[2] + " ; " + answers[3] + "\n";
+        res += "Good answer : " + answers[idGood] + "\n";
+        res += "Image name : " + image.toString() + "\n";
+        return res;
     }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
-
-    public static final Creator<ImageQuestion> CREATOR = new Creator<ImageQuestion>() {
-        @Override
-        public ImageQuestion createFromParcel(Parcel in) {
-            return new ImageQuestion(in);
-        }
-
-        @Override
-        public ImageQuestion[] newArray(int size) {
-            return new ImageQuestion[size];
-        }
-    };
 }

@@ -1,7 +1,6 @@
 package com.morgane.quizit;
 
 import android.graphics.drawable.Drawable;
-import android.os.Parcel;
 
 import java.util.Collections;
 import static java.util.Arrays.asList;
@@ -37,11 +36,6 @@ public class MultipleQuestion extends Questions {
                 idGood = i;
             }
         }
-    }
-
-    protected MultipleQuestion(Parcel in) {
-        theme = Themes.valueOf(in.readString());
-        question = in.readString();
     }
 
     /**
@@ -101,24 +95,12 @@ public class MultipleQuestion extends Questions {
         return 1;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String toString() {
+        String res = "";
+        res += "Theme : " + theme.toString() + "\n";
+        res += "Question : " + question + "\n";
+        res += "Answers : " + answers[0] + " ; " + answers[1] + " ; " + answers[2] + " ; " + answers[3] + "\n";
+        res += "Good answer : " + answers[idGood] + "\n";
+        return res;
     }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-    }
-
-    public static final Creator<MultipleQuestion> CREATOR = new Creator<MultipleQuestion>() {
-        @Override
-        public MultipleQuestion createFromParcel(Parcel in) {
-            return new MultipleQuestion(in);
-        }
-
-        @Override
-        public MultipleQuestion[] newArray(int size) {
-            return new MultipleQuestion[size];
-        }
-    };
 }

@@ -5,6 +5,9 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ProgressBar;
@@ -19,17 +22,17 @@ public class MultipleQuestionActivity extends AppCompatActivity {
     int number;
 
     @Override
+    @SuppressWarnings("ConstantConditions")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_question);
         progress = findViewById(R.id.progressbar);
 
         Intent intent = getIntent();
-        number = intent.getIntExtra("number", 0);
-        Log.d("QUEST", "int : " + number);
-        questions = new ArrayList<Questions>();
-        questions = getIntent().getParcelableArrayListExtra("questions");
-        Log.d("QUEST", "List size : " + questions.size());
+        number = intent.getExtras().getInt("number");
+
+        App app = (App) getApplicationContext();
+        questions = app.list;
 
         countTimer = new MyCountDownTimer(15000, 10);
         countTimer.start();
