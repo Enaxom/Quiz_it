@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -53,6 +52,7 @@ public class ImageQuestionActivity extends AppCompatActivity {
         four = (GradientDrawable) but_four.getBackground();
 
         question = questions.get(number);
+
 
         fill();
         themeColors();
@@ -126,10 +126,8 @@ public class ImageQuestionActivity extends AppCompatActivity {
     }
 
     public void fail() {
-        //TODO box Game Over : replay, return menu
-
-        Toast.makeText(this, "Game Over !", Toast.LENGTH_SHORT).show();
-        returnMenu();
+        GameOverDialog dialog = new GameOverDialog(ImageQuestionActivity.this);
+        dialog.show();
     }
 
     public void win() {
@@ -137,19 +135,22 @@ public class ImageQuestionActivity extends AppCompatActivity {
 
         number ++;
 
+        if (questions.size() != number) {
+            int type = questions.get(number).getType();
 
-        int type = questions.get(number).getType();
-
-        if (type == 1) {
-            intent = new Intent(ImageQuestionActivity.this, MultipleQuestionActivity.class);
-        } else if (type == 2) {
-            intent = new Intent(ImageQuestionActivity.this, TrueFalseActivity.class);
+            if (type == 1) {
+                intent = new Intent(ImageQuestionActivity.this, MultipleQuestionActivity.class);
+            } else if (type == 2) {
+                intent = new Intent(ImageQuestionActivity.this, TrueFalseActivity.class);
+            } else {
+                intent = new Intent(ImageQuestionActivity.this, ImageQuestionActivity.class);
+            }
+            intent.putExtra("number", number);
+            startActivity(intent);
         } else {
-            intent = new Intent(ImageQuestionActivity.this, ImageQuestionActivity.class);
+            WinDialog dialog = new WinDialog(ImageQuestionActivity.this);
+            dialog.show();
         }
-
-        intent.putExtra("number", number);
-        startActivity(intent);
     }
 
     public void fill() {
@@ -218,11 +219,6 @@ public class ImageQuestionActivity extends AppCompatActivity {
         return question.isValid(answer);
     }
 
-    public void returnMenu() {
-        intent = new Intent(ImageQuestionActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-
     public class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
@@ -249,6 +245,12 @@ public class ImageQuestionActivity extends AppCompatActivity {
         public void onFinish() {
             fail();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        BackDialog dialog = new BackDialog(ImageQuestionActivity.this);
+        dialog.show();
     }
 
 }

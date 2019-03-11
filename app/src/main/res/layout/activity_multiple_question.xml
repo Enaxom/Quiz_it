@@ -32,7 +32,6 @@
         <TextView
             android:layout_width="400sp"
             android:layout_marginTop="70sp"
-            android:layout_marginBottom="70sp"
             android:textAlignment="center"
             android:textSize="40sp"
             android:fontFamily="@font/caviardreams"
@@ -40,6 +39,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_question"
             />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"/>
 
         <Button
             android:layout_width="match_parent"

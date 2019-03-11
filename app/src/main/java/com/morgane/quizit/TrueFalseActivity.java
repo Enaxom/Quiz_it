@@ -6,14 +6,11 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,7 +64,7 @@ public class TrueFalseActivity extends AppCompatActivity {
                     bt_true.setColor(Color.parseColor("#2f9926"));
                     win();
                 } else {
-                    bt_false.setColor(Color.RED);
+                    bt_true.setColor(Color.RED);
                     fail();
                 }
             }
@@ -91,10 +88,8 @@ public class TrueFalseActivity extends AppCompatActivity {
     }
 
     public void fail() {
-        //TODO box Game Over : replay, return menu
-
-        Toast.makeText(this, "Game Over !", Toast.LENGTH_SHORT).show();
-        returnMenu();
+        GameOverDialog dialog = new GameOverDialog(TrueFalseActivity.this);
+        dialog.show();
     }
 
     public void win() {
@@ -102,19 +97,23 @@ public class TrueFalseActivity extends AppCompatActivity {
 
         number ++;
 
+        if (questions.size() != number) {
+            int type = questions.get(number).getType();
 
-        int type = questions.get(number).getType();
+            if (type == 1) {
+                intent = new Intent(TrueFalseActivity.this, MultipleQuestionActivity.class);
+            } else if (type == 2) {
+                intent = new Intent(TrueFalseActivity.this, TrueFalseActivity.class);
+            } else {
+                intent = new Intent(TrueFalseActivity.this, ImageQuestionActivity.class);
+            }
 
-        if (type == 1) {
-            intent = new Intent(TrueFalseActivity.this, MultipleQuestionActivity.class);
-        } else if (type == 2) {
-            intent = new Intent(TrueFalseActivity.this, TrueFalseActivity.class);
+            intent.putExtra("number", number);
+            startActivity(intent);
         } else {
-            intent = new Intent(TrueFalseActivity.this, ImageQuestionActivity.class);
+            WinDialog dialog = new WinDialog(TrueFalseActivity.this);
+            dialog.show();
         }
-
-        intent.putExtra("number", number);
-        startActivity(intent);
     }
 
     public void fill() {
@@ -165,11 +164,6 @@ public class TrueFalseActivity extends AppCompatActivity {
         return question.isValid(answer);
     }
 
-    public void returnMenu() {
-        intent = new Intent(TrueFalseActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-
     public class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
@@ -196,6 +190,12 @@ public class TrueFalseActivity extends AppCompatActivity {
         public void onFinish() {
             fail();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        BackDialog dialog = new BackDialog(TrueFalseActivity.this);
+        dialog.show();
     }
 
 }

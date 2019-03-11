@@ -124,10 +124,8 @@ public class MultipleQuestionActivity extends AppCompatActivity {
     }
 
     public void fail() {
-        //TODO box Game Over : replay, return menu
-
-        Toast.makeText(this, "Game Over !", Toast.LENGTH_SHORT).show();
-        returnMenu();
+        GameOverDialog dialog = new GameOverDialog(MultipleQuestionActivity.this);
+        dialog.show();
     }
 
     public void win() {
@@ -135,19 +133,23 @@ public class MultipleQuestionActivity extends AppCompatActivity {
 
         number ++;
 
+        if (questions.size() != number) {
+            int type = questions.get(number).getType();
 
-        int type = questions.get(number).getType();
+            if (type == 1) {
+                intent = new Intent(MultipleQuestionActivity.this, MultipleQuestionActivity.class);
+            } else if (type == 2) {
+                intent = new Intent(MultipleQuestionActivity.this, TrueFalseActivity.class);
+            } else {
+                intent = new Intent(MultipleQuestionActivity.this, ImageQuestionActivity.class);
+            }
 
-        if (type == 1) {
-            intent = new Intent(MultipleQuestionActivity.this, MultipleQuestionActivity.class);
-        } else if (type == 2) {
-            intent = new Intent(MultipleQuestionActivity.this, TrueFalseActivity.class);
+            intent.putExtra("number", number);
+            startActivity(intent);
         } else {
-            intent = new Intent(MultipleQuestionActivity.this, ImageQuestionActivity.class);
+            WinDialog dialog = new WinDialog(MultipleQuestionActivity.this);
+            dialog.show();
         }
-
-        intent.putExtra("number", number);
-        startActivity(intent);
     }
 
     public void fill() {
@@ -215,11 +217,6 @@ public class MultipleQuestionActivity extends AppCompatActivity {
         return question.isValid(answer);
     }
 
-    public void returnMenu() {
-        intent = new Intent(MultipleQuestionActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-
     public class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
@@ -246,6 +243,12 @@ public class MultipleQuestionActivity extends AppCompatActivity {
         public void onFinish() {
             fail();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        BackDialog dialog = new BackDialog(MultipleQuestionActivity.this);
+        dialog.show();
     }
 
 }
