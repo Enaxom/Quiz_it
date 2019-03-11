@@ -8,4 +8,10 @@
 
     <string name="yes">True</string>
     <string name="no">False</string>
+
+    <string name="return_menu">Do you want to return to the menu?</string>
+    <string name="menu">Menu</string>
+    <string name="game_over">Game over !</string>
+    <string name="win">You win !</string>
+    <string name="resume">Resume</string>
 </resources>
